@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css");
+@import url("https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.css");
+
 
 :root {
   /* 1rem === 10px, but remain responsive to user font size settings */
   font-size: 62.5%;
 
-  --navbar-width: 23.6rem;
+  --global-width: 100%;
 }
 
 body {

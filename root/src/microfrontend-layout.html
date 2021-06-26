@@ -1,7 +1,11 @@
 <single-spa-router>
   <main>
     <route default>
-      <application name="@todo/list"></application>
+      <application name="@todo/login"></application>
+    </route>
+    <route path="list">
+      <application name="@todo/create"></application>
+      <application name="@todo/list-todo"></application>
     </route>
   </main>
 </single-spa-router>

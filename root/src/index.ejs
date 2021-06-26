@@ -8,31 +8,27 @@
   <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
   <meta name="importmap-type" content="systemjs-importmap" />
-  <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
-  <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
-  <!-- <meta name="import-map-overrides-domains" content="denylist:prod.example.com" /> -->
-
-  <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
-
-    1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
-    2. UMD - https://github.com/umdjs/umd
-    3. Global variable
-
-    More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
-  -->
+  <script src="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/js/vue.production.js"></script>
+  <script src="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.umd.min.js"></script>
+  <!-- <script src="https://frontend-config-bizflycloud.cdn.vccloud.vn/config.js"></script> -->
   <script type="systemjs-importmap">
     {
       "imports": {
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+        "vue": "https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js",
+        "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@3.1.6/dist/vue-router.min.js",
+        "axios": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",
+        "js-cookie": "https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
       }
     }
   </script>
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
   <% if (isLocal) { %>
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@todo/list": "http://localhost:8500/js/app.js",
+        "@todo/list-todo": "http://localhost:8500/js/app.js",
+        "@todo/create": "http://localhost:8800/js/app.js",
+        "@todo/login": "http://localhost:8700/js/app.js",
         "@todo/root-config": "//localhost:9000/todo-root-config.js",
         "@todo/style": "http://localhost:8600/todo-style.js"
       }
@@ -51,8 +47,10 @@
 </head>
 <body>
   <script>
-    System.import('@todo/root-config');
-    System.import('@todo/style');
+    Promise.all([
+      System.import('@todo/root-config'),
+      System.import('@todo/style')
+    ])
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>

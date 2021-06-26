@@ -13,7 +13,6 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return merge(defaultConfig, {
-    // modify the webpack config however you'd like to by adding to this object
     plugins: [
       new HtmlWebpackPlugin({
         inject: false,
@@ -24,5 +23,12 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       }),
     ],
+    externals: [
+      "single-spa", 
+      "vue", 
+      "vue-router", 
+      "axios", 
+      "js-cookie", 
+      /^@todo\/.+$/],
   });
 };
