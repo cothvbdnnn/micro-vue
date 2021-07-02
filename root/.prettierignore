@@ -5,6 +5,7 @@ yarn-error.log
 package-lock.json
 LICENSE
 *.ejs
+.env
 dist
 coverage
 pnpm-lock.yaml

@@ -8,9 +8,8 @@
   <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
   <meta name="importmap-type" content="systemjs-importmap" />
-  <script src="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/js/vue.production.js"></script>
-  <script src="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.umd.min.js"></script>
-  <!-- <script src="https://frontend-config-bizflycloud.cdn.vccloud.vn/config.js"></script> -->
+  <script src="<%= process.env.VUE_APP_CONFIG_ENV %>"></script>
+  <script src="<%= process.env.UMD %>"></script>
   <script type="systemjs-importmap">
     {
       "imports": {
@@ -43,7 +42,18 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
   <% } %>
-
+  <script>
+    function addCSSLink(href) {
+      const head = document.getElementsByTagName('head')[0]
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.type = 'text/css'
+      link.href = href
+      head.appendChild(link)
+    }
+    addCSSLink('https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.css')
+    addCSSLink('https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css')
+</script>
 </head>
 <body>
   <script>

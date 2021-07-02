@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = "todo";
@@ -22,13 +23,15 @@ module.exports = (webpackConfigEnv, argv) => {
           orgName,
         },
       }),
+      new Dotenv(),
     ],
     externals: [
-      "single-spa", 
-      "vue", 
-      "vue-router", 
-      "axios", 
-      "js-cookie", 
-      /^@todo\/.+$/],
+      "single-spa",
+      "vue",
+      "vue-router",
+      "axios",
+      "js-cookie",
+      /^@todo\/.+$/,
+    ],
   });
 };
