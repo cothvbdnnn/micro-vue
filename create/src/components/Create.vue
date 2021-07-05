@@ -1,7 +1,7 @@
 <template>
   <bizfly-row class="row">
     <bizfly-col :span="12" class="form">
-      <h1>Custom Event</h1>
+      <Header title="Custom Event"></Header>
       <h2>Add</h2>
       <bizfly-form class="mt-3" ref="formCreate" :model="formCreate">
         <bizfly-row>
@@ -26,7 +26,7 @@
       </bizfly-form>
     </bizfly-col>
     <bizfly-col :span="12" class="form">
-      <h1>Global Store</h1>
+      <Header title="Global Store"></Header>
       <h2>Add</h2>
       <bizfly-form class="mt-3" ref="formCreate" :model="formCreate">
         <bizfly-row>
@@ -55,7 +55,8 @@
 
 <script>
 import { axios } from "@/utils/axios";
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
+import { Header } from '@todo/style'
 
 export default {
   data() {
@@ -75,6 +76,9 @@ export default {
         index: ''
       }
     };
+  },
+  components: {
+    Header
   },
   beforeMount() {
     addEventListener("detailEdit", this.updateTitle);
