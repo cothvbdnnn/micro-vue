@@ -3,7 +3,9 @@ module.exports = {
     externals: [
       "single-spa", 
       "vue", 
+      "bizfly",
       "vue-router", 
+      "vuex",
       "axios", 
       "js-cookie", 
       /^@todo\/.+/

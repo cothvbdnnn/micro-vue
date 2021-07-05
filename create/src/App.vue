@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Add</h1>
     <Create />
   </div>
 </template>

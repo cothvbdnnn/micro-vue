@@ -11,6 +11,6 @@ module.exports = (webpackConfigEnv, argv) => {
 
   return merge(defaultConfig, {
     plugins: [],
-    externals: [/^@todo\/.+$/],
+    externals: ['vuex', /^@todo\/.+$/],
   });
 };

@@ -1,23 +1,43 @@
 <template>
-  <div>
-    <div v-for="(item, id) in listTodo" :key="id">
-      <bizfly-row class="item">
-        <bizfly-col :span="8">
-          <p><b>{{ item.title }}</b></p>
-        </bizfly-col>
-        <bizfly-col :span="8">
-          <bizfly-button type="primary" @click="editTodo(item)">Edit</bizfly-button>
-        </bizfly-col>
-        <bizfly-col :span="8">
-          <bizfly-button :loading="loadingRemove" type="primary" @click="submitDel(item.id)">Remove</bizfly-button>
-        </bizfly-col>
-      </bizfly-row>
-    </div>
-  </div>
+  <bizfly-row class="row">
+    <bizfly-col :span="12">
+     <h2>List</h2>
+      <div v-for="(item, id) in listTodo" :key="id">
+        <bizfly-row class="item">
+          <bizfly-col :span="8">
+            <p><b>{{ item.title }}</b></p>
+          </bizfly-col>
+          <bizfly-col :span="8">
+            <bizfly-button type="primary" @click="editTodo(item)">Edit</bizfly-button>
+          </bizfly-col>
+          <bizfly-col :span="8">
+            <bizfly-button :loading="loadingRemove" type="primary" @click="submitDel(item.id)">Remove</bizfly-button>
+          </bizfly-col>
+        </bizfly-row>
+      </div>
+    </bizfly-col>
+    <bizfly-col :span="12">
+      <h2>List</h2>
+      <div v-for="(item, index) in global" :key="index">
+        <bizfly-row class="item">
+          <bizfly-col :span="8">
+            <p><b>{{ item.title }}</b></p>
+          </bizfly-col>
+          <bizfly-col :span="8">
+            <bizfly-button type="primary" @click="handleEditGlobal(item.title, index)">Edit</bizfly-button>
+          </bizfly-col>
+          <bizfly-col :span="8">
+            <bizfly-button type="primary" @click="handleRemoveGlobal(index)">Remove</bizfly-button>
+          </bizfly-col>
+        </bizfly-row>
+      </div>
+    </bizfly-col>
+  </bizfly-row>
 </template>
 
 <script>
 import { axios } from "@/utils/axios";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -33,7 +53,28 @@ export default {
       removeEventListener("loadTodo", this.getData)
     })
   },
+  computed: {
+    ...mapGetters('globalStore', [
+      'global'
+    ]),
+  },
   methods: {
+    ...mapActions('globalStore', [
+      'removeGlobal'
+    ]),
+    handleRemoveGlobal(index) {
+      this.removeGlobal(index)
+    },
+    handleEditGlobal (title, index) {
+      dispatchEvent(
+        new CustomEvent("detailEditGlobal", {
+          detail: {
+            title: title,
+            index: index,
+          },
+        })
+      );
+    },
     async getData() {
       const params = {
         page: 1,
@@ -63,6 +104,13 @@ export default {
 </script>
 
 <style scoped>
+.row {
+  margin: auto;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
 .item p {
   padding: 0 10px;
   margin: 0;

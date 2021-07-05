@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
 import App from './App.vue';
+import store from './store'
+// import bizfly from 'bizfly';
 import router from './router'
 
 window['bizfly-ui'].default.install(Vue)
@@ -15,6 +17,7 @@ const vueLifecycles = singleSpaVue({
       });
     },
     router,
+    store
   },
 });
 
