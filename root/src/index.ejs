@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Root Config</title>
+  <title>Micro Frontend</title>
   <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
   <meta name="importmap-type" content="systemjs-importmap" />
   <script src="<%= process.env.VUE_APP_CONFIG_ENV %>"></script>
-  <script type="systemjs-importmap">
+  <script src="<%= process.env.UMD %>"></script>
+  <script preload type="systemjs-importmap">
     {
       "imports": {
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
@@ -18,12 +19,10 @@
         "vuex": "https://cdn.jsdelivr.net/npm/vuex/dist/vuex.min.js",
         "vue-loader": "https://cdn.jsdelivr.net/npm/vue-loader@16.3.0/dist/index.min.js",
         "axios": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",
-        "js-cookie": "https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js",
-        "bizfly": "<%= process.env.UMD %>"
+        "js-cookie": "https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
       }
     }
   </script>
-  <script src="<%= process.env.UMD %>"></script>
   <% if (isLocal) { %>
   <script type="systemjs-importmap">
     {
@@ -35,35 +34,35 @@
         "@todo/style": "http://localhost:8600/todo-style.js"
       }
     }
-  </script>
-  <% } %>
-  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
-  <% if (isLocal) { %>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-  <% } else { %>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-  <% } %>
-  <script>
-    function addCSSLink(href) {
-      const head = document.getElementsByTagName('head')[0]
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.type = 'text/css'
-      link.href = href
-      head.appendChild(link)
-    }
-    addCSSLink('https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.css')
-    addCSSLink('https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css')
+</script>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+<% if (isLocal) { %>
+<script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+<% } else { %>
+<script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+<% } %>
+<script>
+  const bizflyCss = [
+    'https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.css',
+    'https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css'
+  ]
+  const head = document.getElementsByTagName('head')[0]
+  bizflyCss.forEach(url => {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.type = 'text/css'
+    link.href = url
+    head.appendChild(link)
+  })
 </script>
 </head>
 <body>
   <script>
-    Promise.all([
-      System.import('@todo/root-config'),
-      System.import('@todo/style')
-    ])
+    System.import('@todo/root-config'),
+    System.import('@todo/style')
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>

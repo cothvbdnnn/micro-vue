@@ -6,10 +6,19 @@
       <bizfly-form class="mt-3" ref="formCreate" :model="formCreate">
         <bizfly-row>
           <bizfly-col :span="14">
-            <bizfly-input placeholder="Add" type="text" v-model="formAddTodo.title" />
+            <bizfly-input
+              placeholder="Add"
+              type="text"
+              v-model="formAddTodo.title"
+            />
           </bizfly-col>
           <bizfly-col :span="8">
-            <bizfly-button :loading="loadingCreate" type="primary" @click="submitFormAddTodo">Add</bizfly-button>
+            <bizfly-button
+              :loading="loadingCreate"
+              type="primary"
+              @click="submitFormAddTodo"
+              >Add</bizfly-button
+            >
           </bizfly-col>
         </bizfly-row>
       </bizfly-form>
@@ -17,12 +26,21 @@
         <h2>Edit</h2>
         <bizfly-row>
           <bizfly-col :span="14">
-            <bizfly-input placeholder="Edit" type="text" v-model="formEditTodo.title" />
+            <bizfly-input
+              placeholder="Edit"
+              type="text"
+              v-model="formEditTodo.title"
+            />
           </bizfly-col>
-        <bizfly-col :span="8">
-          <bizfly-button :loading="loadingEdit" type="primary" @click="submitFormEditTodo">Edit</bizfly-button>
-        </bizfly-col>
-      </bizfly-row>
+          <bizfly-col :span="8">
+            <bizfly-button
+              :loading="loadingEdit"
+              type="primary"
+              @click="submitFormEditTodo"
+              >Edit</bizfly-button
+            >
+          </bizfly-col>
+        </bizfly-row>
       </bizfly-form>
     </bizfly-col>
     <bizfly-col :span="12" class="form">
@@ -34,7 +52,9 @@
             <bizfly-input placeholder="Add" type="text" v-model="titleGlobal" />
           </bizfly-col>
           <bizfly-col :span="8">
-            <bizfly-button :loading="loadingCreate" type="primary" @click="submitAddGlobal">Add</bizfly-button>
+            <bizfly-button type="primary" @click="submitAddGlobal"
+              >Add</bizfly-button
+            >
           </bizfly-col>
         </bizfly-row>
       </bizfly-form>
@@ -42,12 +62,18 @@
         <h2>Edit</h2>
         <bizfly-row>
           <bizfly-col :span="14">
-            <bizfly-input placeholder="Edit" type="text" v-model="itemGlobal.title" />
+            <bizfly-input
+              placeholder="Edit"
+              type="text"
+              v-model="itemGlobal.title"
+            />
           </bizfly-col>
-        <bizfly-col :span="8">
-          <bizfly-button :loading="loadingEdit" type="primary" @click="submitEditGlobal">Edit</bizfly-button>
-        </bizfly-col>
-      </bizfly-row>
+          <bizfly-col :span="8">
+            <bizfly-button type="primary" @click="submitEditGlobal"
+              >Edit</bizfly-button
+            >
+          </bizfly-col>
+        </bizfly-row>
       </bizfly-form>
     </bizfly-col>
   </bizfly-row>
@@ -55,8 +81,8 @@
 
 <script>
 import { axios } from "@/utils/axios";
-import { mapActions } from 'vuex';
-import { Header } from '@todo/style'
+import { mapActions } from "vuex";
+import { Header } from "@todo/style";
 
 export default {
   data() {
@@ -64,21 +90,21 @@ export default {
       loadingCreate: false,
       loadingEdit: false,
       formAddTodo: {
-        title: '',
+        title: "",
       },
       formEditTodo: {
-        id: '',
-        title: '',
+        id: "",
+        title: "",
       },
-      titleGlobal: '',
+      titleGlobal: "",
       itemGlobal: {
-        title: '',
-        index: ''
-      }
+        title: "",
+        index: "",
+      },
     };
   },
   components: {
-    Header
+    Header,
   },
   beforeMount() {
     addEventListener("detailEdit", this.updateTitle);
@@ -86,43 +112,42 @@ export default {
     this.$on("hook:beforeDestroy", () => {
       removeEventListener("detailEdit", this.updateTitle);
       addEventListener("detailEditGlobal", this.updateTitleGlobal);
-    })
+    });
   },
   methods: {
-    ...mapActions('globalStore', [
-      'editGlobal',
-      'addGlobal'
-    ]),
+    ...mapActions("globalStore", ["editGlobal", "addGlobal"]),
     submitEditGlobal() {
-      this.editGlobal(this.itemGlobal)
-      this.itemGlobal = {}
+      this.editGlobal(this.itemGlobal);
+      this.itemGlobal = {};
     },
     submitAddGlobal() {
-      this.addGlobal(this.titleGlobal)
-      this.titleGlobal = ''
+      this.addGlobal(this.titleGlobal);
+      this.titleGlobal = "";
     },
     updateTitle(event) {
-      this.formEditTodo = event.detail
+      this.formEditTodo = event.detail;
     },
     updateTitleGlobal(event) {
-      this.itemGlobal = event.detail
+      this.itemGlobal = event.detail;
     },
     async submitFormAddTodo() {
-      this.loadingCreate = true
-      await axios.post("api/v1/todos", this.formAddTodo).catch(() => { this.loadingCreate = false })
-      this.formAddTodo.title = ""
-      this.loadingCreate = false
+      this.loadingCreate = true;
+      await axios.post("api/v1/todos", this.formAddTodo).catch(() => {
+        this.loadingCreate = false;
+      });
+      this.formAddTodo.title = "";
+      this.loadingCreate = false;
       dispatchEvent(new CustomEvent("loadTodo"));
     },
     async submitFormEditTodo() {
-      this.loadingEdit = true
+      this.loadingEdit = true;
       await axios.put(
         `api/v1/todos/${this.formEditTodo.id}`,
         this.formEditTodo
       );
       dispatchEvent(new CustomEvent("loadTodo"));
-      this.formEditTodo.title = ""
-      this.loadingEdit = false
+      this.formEditTodo.title = "";
+      this.loadingEdit = false;
     },
   },
 };
@@ -136,10 +161,8 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.form{
+.form {
   max-width: 300px;
   margin: auto;
 }
-
-
 </style>

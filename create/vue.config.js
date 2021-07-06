@@ -1,14 +1,13 @@
 module.exports = {
   configureWebpack: {
     externals: [
-      "single-spa", 
-      "vue", 
-      "bizfly",
-      "vue-router", 
+      "single-spa",
+      "vue",
+      "vue-router",
       "vuex",
-      "axios", 
-      "js-cookie", 
-      /^@todo\/.+/
-    ]
+      "axios",
+      "js-cookie",
+      /^@todo\/.+/,
+    ],
   },
 };
