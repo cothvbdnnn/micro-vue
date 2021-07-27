@@ -8,8 +8,16 @@
   <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
   <meta name="importmap-type" content="systemjs-importmap" />
+  <link rel="stylesheet" type="text/css" href="https://bizfly.hn.ss.bfcplatform.vn/bizfly-ui.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css"> -->
   <script src="<%= process.env.VUE_APP_CONFIG_ENV %>"></script>
-  <script src="<%= process.env.UMD %>"></script>
+  <script src="https://bizfly.hn.ss.bfcplatform.vn/bizfly-ui.umd.min.js"></script>
+  <!-- <script src="https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.umd.min.js"></script> --> 
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+  <script src="https://unpkg.com/element-ui"></script>
+  <script src="https://unpkg.com/element-ui/lib/umd/locale/vi.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
   <script preload type="systemjs-importmap">
     {
       "imports": {
@@ -44,23 +52,11 @@
 <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
 <% } %>
-<script>
-  const bizflyCss = [
-    'https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-ui.css',
-    'https://bizfly-ui-bizflycloud.cdn.vccloud.vn/resources/latest/bizfly-icons.css'
-  ]
-  const head = document.getElementsByTagName('head')[0]
-  bizflyCss.forEach(url => {
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.type = 'text/css'
-    link.href = url
-    head.appendChild(link)
-  })
-</script>
 </head>
 <body>
   <script>
+    // console.log(Vue.locale('en', ELEMENT.lang.en));
+    // window['bizfly-ui'].default.locale(window['bizfly-ui'].default.lang.en)
     System.import('@todo/root-config'),
     System.import('@todo/style')
   </script>
