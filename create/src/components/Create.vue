@@ -1,82 +1,78 @@
 <template>
-  <bizfly-row class="row">
-    <bizfly-col :span="12" class="form">
+  <bf-row class="row">
+    <bf-col :span="12" class="form">
       <Header title="Custom Event"></Header>
       <h2>Add</h2>
-      <bizfly-form class="mt-3" ref="formCreate" :model="formCreate">
-        <bizfly-row>
-          <bizfly-col :span="14">
-            <bizfly-input
+      <bf-form class="mt-3" ref="formCreate" :model="formCreate">
+        <bf-row>
+          <bf-col :span="14">
+            <bf-input
               placeholder="Add"
               type="text"
               v-model="formAddTodo.title"
             />
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button
               :loading="loadingCreate"
               type="primary"
               @click="submitFormAddTodo"
-              >Add</bizfly-button
+              >Add</bf-button
             >
-          </bizfly-col>
-        </bizfly-row>
-      </bizfly-form>
-      <bizfly-form class="mt-3" ref="formEdit">
+          </bf-col>
+        </bf-row>
+      </bf-form>
+      <bf-form class="mt-3" ref="formEdit">
         <h2>Edit</h2>
-        <bizfly-row>
-          <bizfly-col :span="14">
-            <bizfly-input
+        <bf-row>
+          <bf-col :span="14">
+            <bf-input
               placeholder="Edit"
               type="text"
               v-model="formEditTodo.title"
             />
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button
               :loading="loadingEdit"
               type="primary"
               @click="submitFormEditTodo"
-              >Edit</bizfly-button
+              >Edit</bf-button
             >
-          </bizfly-col>
-        </bizfly-row>
-      </bizfly-form>
-    </bizfly-col>
-    <bizfly-col :span="12" class="form">
+          </bf-col>
+        </bf-row>
+      </bf-form>
+    </bf-col>
+    <bf-col :span="12" class="form">
       <Header title="Global Store"></Header>
       <h2>Add</h2>
-      <bizfly-form class="mt-3" ref="formCreate" :model="formCreate">
-        <bizfly-row>
-          <bizfly-col :span="14">
-            <bizfly-input placeholder="Add" type="text" v-model="titleGlobal" />
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button type="primary" @click="submitAddGlobal"
-              >Add</bizfly-button
-            >
-          </bizfly-col>
-        </bizfly-row>
-      </bizfly-form>
-      <bizfly-form class="mt-3" ref="formEdit">
+      <bf-form class="mt-3" ref="formCreate" :model="formCreate">
+        <bf-row>
+          <bf-col :span="14">
+            <bf-input placeholder="Add" type="text" v-model="titleGlobal" />
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button type="primary" @click="submitAddGlobal">Add</bf-button>
+          </bf-col>
+        </bf-row>
+      </bf-form>
+      <bf-form class="mt-3" ref="formEdit">
         <h2>Edit</h2>
-        <bizfly-row>
-          <bizfly-col :span="14">
-            <bizfly-input
+        <bf-row>
+          <bf-col :span="14">
+            <bf-input
               placeholder="Edit"
               type="text"
               v-model="itemGlobal.title"
             />
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button type="primary" @click="submitEditGlobal"
-              >Edit</bizfly-button
-            >
-          </bizfly-col>
-        </bizfly-row>
-      </bizfly-form>
-    </bizfly-col>
-  </bizfly-row>
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button type="primary" @click="submitEditGlobal">Edit</bf-button>
+          </bf-col>
+        </bf-row>
+      </bf-form>
+    </bf-col>
+  </bf-row>
 </template>
 
 <script>

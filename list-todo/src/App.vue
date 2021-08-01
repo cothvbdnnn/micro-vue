@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <List />
+    <router-link to="/list/test"> test </router-link>
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import List from './components/List'
-
 export default {
-  name: 'App',
-  components: {
-    List
-  }
-}
+  name: "App",
+  beforeMount() {},
+};
 </script>
 
 <style>

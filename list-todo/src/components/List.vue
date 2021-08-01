@@ -1,45 +1,61 @@
 <template>
-  <bizfly-row class="row">
-    <bizfly-col :span="12">
-     <h2>List</h2>
+  <bf-row class="row">
+    <bf-col :span="12">
+      <h2>List</h2>
       <div v-for="(item, id) in listTodo" :key="id">
-        <bizfly-row class="item">
-          <bizfly-col :span="8">
-            <p><b>{{ item.title }}</b></p>
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button type="primary" @click="editTodo(item)">Edit</bizfly-button>
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button :loading="loadingRemove" type="primary" @click="submitDel(item.id)">Remove</bizfly-button>
-          </bizfly-col>
-        </bizfly-row>
+        <bf-row class="item">
+          <bf-col :span="8">
+            <p>
+              <b>{{ item.title }}</b>
+            </p>
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button type="primary" @click="editTodo(item)">Edit</bf-button>
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button
+              :loading="loadingRemove"
+              type="primary"
+              @click="submitDel(item.id)"
+              >Remove</bf-button
+            >
+          </bf-col>
+        </bf-row>
       </div>
-    </bizfly-col>
-    <bizfly-col :span="12">
+    </bf-col>
+    <bf-col :span="12">
       <h2>List</h2>
       <div v-for="(item, index) in global" :key="index">
-        <bizfly-row class="item">
-          <bizfly-col :span="8">
-            <p><b>{{ item.title }}</b></p>
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button type="primary" @click="handleEditGlobal(item.title, index)">Edit</bizfly-button>
-          </bizfly-col>
-          <bizfly-col :span="8">
-            <bizfly-button type="primary" @click="handleRemoveGlobal(index)">Remove</bizfly-button>
-          </bizfly-col>
-        </bizfly-row>
+        <bf-row class="item">
+          <bf-col :span="8">
+            <p>
+              <b>{{ item.title }}</b>
+            </p>
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button
+              type="primary"
+              @click="handleEditGlobal(item.title, index)"
+              >Edit</bf-button
+            >
+          </bf-col>
+          <bf-col :span="8">
+            <bf-button type="primary" @click="handleRemoveGlobal(index)"
+              >Remove</bf-button
+            >
+          </bf-col>
+        </bf-row>
       </div>
-    </bizfly-col>
-  </bizfly-row>
+    </bf-col>
+  </bf-row>
 </template>
 
 <script>
 import { axios } from "@/utils/axios";
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
+  name: "List",
   data() {
     return {
       listTodo: [],
@@ -50,22 +66,18 @@ export default {
     this.getData();
     addEventListener("loadTodo", this.getData);
     this.$on("hook:beforeDestroy", () => {
-      removeEventListener("loadTodo", this.getData)
-    })
+      removeEventListener("loadTodo", this.getData);
+    });
   },
   computed: {
-    ...mapGetters('globalStore', [
-      'global'
-    ]),
+    ...mapGetters("globalStore", ["global"]),
   },
   methods: {
-    ...mapActions('globalStore', [
-      'removeGlobal'
-    ]),
+    ...mapActions("globalStore", ["removeGlobal"]),
     handleRemoveGlobal(index) {
-      this.removeGlobal(index)
+      this.removeGlobal(index);
     },
-    handleEditGlobal (title, index) {
+    handleEditGlobal(title, index) {
       dispatchEvent(
         new CustomEvent("detailEditGlobal", {
           detail: {
@@ -84,9 +96,9 @@ export default {
       this.listTodo = response.data;
     },
     async submitDel(idTodo) {
-      this.loadingRemove = true
+      this.loadingRemove = true;
       await axios.delete(`api/v1/todos/${idTodo}`);
-      this.loadingRemove = false
+      this.loadingRemove = false;
       this.getData();
     },
     editTodo({ id, title }) {

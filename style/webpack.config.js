@@ -1,6 +1,6 @@
-const merge = require('webpack-merge');
+const merge = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
@@ -16,13 +16,10 @@ module.exports = (webpackConfigEnv, argv) => {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
-        }
-      ]
+          loader: "vue-loader",
+        },
+      ],
     },
-    plugins: [
-      new VueLoaderPlugin()
-    ],
-    externals: ['vuex', /^@todo\/.+$/],
+    plugins: [new VueLoaderPlugin()],
   });
 };

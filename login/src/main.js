@@ -6,8 +6,16 @@ import router from "./router";
 
 const bizflyUI = window["bizfly-ui"].default;
 
-const { BfButton, BfForm, BfInput, BfPagination, BfRadio, BfRadioGroup } =
-  bizflyUI;
+const {
+  BfButton,
+  BfForm,
+  BfInput,
+  BfPagination,
+  BfRadio,
+  BfRadioGroup,
+  locale,
+  languages,
+} = bizflyUI;
 Vue.component("BfButton", BfButton);
 Vue.component("BfForm", BfForm);
 Vue.component("BfInput", BfInput);
@@ -15,13 +23,7 @@ Vue.component("BfPagination", BfPagination);
 Vue.component("BfRadio", BfRadio);
 Vue.component("BfRadioGroup", BfRadioGroup);
 
-console.log(bizflyUI);
-
-if (Cookies.get("lang") === "vi") {
-  bizflyUI.locale(bizflyUI.languages.vi);
-} else {
-  bizflyUI.locale(bizflyUI.languages.en);
-}
+locale(languages[Cookies.get("lang")]);
 
 Vue.config.productionTip = false;
 
